@@ -1,0 +1,33 @@
+# Ignore Python artifacts
+*.pyc
+*.pyo
+__pycache__/
+
+# Ignore virtual environments
+venv/
+env/
+# Ignore IDE/editor configurations
+.vscode/
+.idea/
+*.swp
+*~
+
+# Ignore Django database files (if using SQLite locally for testing)
+*.sqlite3
+db_data
+# Ignore logs
+*.log
+
+# Ignore static and media files (if generated locally)
+media/
+staticfiles/
+
+# Ignore environment variables file
+.env
+
+# Ignore migrations files (optional, if not tracking migrations in Git)
+**/migrations/*.py
+!**/migrations/__init__.py
+
+# Ignore Docker-specific files that shouldn't be in Git
+docker-compose.override.yml

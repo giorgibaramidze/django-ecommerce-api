@@ -1,0 +1,31 @@
+# Ignore Python artifacts
+*.pyc
+*.pyo
+__pycache__/
+
+# Ignore virtual environments
+venv/
+env/
+
+# Ignore unnecessary directories
+.vscode/
+.idea/
+*.swp
+*~
+
+# Ignore logs
+*.log
+
+# Ignore static and media files (not needed in the Docker image)
+media/
+staticfiles/
+
+# Ignore local environment variables and secrets
+.env
+
+# Ignore migration files (optional, if not needed during Docker build)
+**/migrations/*.py
+!**/migrations/__init__.py
+
+# Ignore Docker-specific files that don't need to be in the image
+docker-compose.override.yml
