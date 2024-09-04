@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .models import Category, Product, Brand
+from .models import Category
 from rest_framework.response import Response
-from .serializers import BrandSerializer, CategorySerializer, ProductSerializer
+from .serializers import CategorySerializer
 
 class CategoryView(viewsets.ViewSet):
     queryset = Category.objects.all()
