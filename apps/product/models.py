@@ -1,5 +1,5 @@
 from django.db import models
-from ..category.models import Category
+from ..category.models import Category, Brand
 from mptt.models import TreeForeignKey, MPTTModel
 
 class Product(models.Model):
