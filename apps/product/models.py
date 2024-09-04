@@ -1,9 +1,12 @@
 from django.db import models
+from ..category.models import Category
+from mptt.models import TreeForeignKey, MPTTModel
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
     is_digital = models.BooleanField(default=False) 
+    category = TreeForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
     
     class Meta:
         db_table = "product"
