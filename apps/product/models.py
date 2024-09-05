@@ -1,6 +1,8 @@
 from django.db import models
-from ..category.models import Category, Brand
+from apps.category.models import Category, Brand
 from mptt.models import TreeForeignKey, MPTTModel
+from ecommerce.utils.querysets import ActiveQuerySet
+
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
@@ -10,6 +12,8 @@ class Product(models.Model):
     brand = models.ForeignKey(Brand, on_delete=models.SET_NULL, null=True, blank=True) 
     category = TreeForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
     is_active = models.BooleanField(default=False)
+    
+    objects = ActiveQuerySet.as_manager()
     
     class Meta:
         db_table = "product"
@@ -23,3 +27,5 @@ class ProductLine(models.Model):
     stock_qty = models.IntegerField()
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="product_line")
     is_active = models.BooleanField(default=False)
+    
+    objects = ActiveQuerySet.as_manager()

@@ -9,20 +9,16 @@ from django.db import connection
 
 
 class ProductViewSet(viewsets.ModelViewSet):
-    queryset = Product.objects.select_related("brand", "category").prefetch_related("product_line")
+    queryset = Product.objects.isactive().select_related("brand", "category").prefetch_related("product_line")
     serializer_class = ProductSerializer
-
     lookup_field = "slug"
-    print(len(list(connection.queries)))
-    print(list(connection.queries))
+
     @action(methods=["get"], detail=False, url_path=r"category/(?P<category>\w+)")
     def list_product_by_category(self, request, category=None):
         """
         Endpoint for fetching products by category
         """
         products = self.queryset.filter(category__name=category)
-        print(len(list(connection.queries)))
-        print(list(connection.queries))
         serializer = self.get_serializer(products, many=True)
         return Response(serializer.data)
 
