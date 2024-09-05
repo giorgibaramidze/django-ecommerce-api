@@ -3,11 +3,13 @@ from rest_framework import serializers
 from .models import Brand, Category
 
 class BrandSerializer(serializers.ModelSerializer):
+    
     class Meta:
         model = Brand
-        fields = "__all__"
+        fields = ["name"]
 
 class CategorySerializer(serializers.ModelSerializer):
+    category_name = serializers.CharField(source="name")
     class Meta:
         model = Category
-        fields = "__all__"
+        fields = ["category_name"]
