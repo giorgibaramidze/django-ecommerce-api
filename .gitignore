@@ -32,3 +32,5 @@ staticfiles/
 # Ignore Docker-specific files that shouldn't be in Git
 docker-compose.override.yml
 schema.yml
+htmlcov/
+.coverage
