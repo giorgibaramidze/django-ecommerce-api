@@ -38,16 +38,40 @@ class ProductLine(models.Model):
         """
         super().clean()
 
-        # Check if order is unique for the same product
         qs = ProductLine.objects.filter(product=self.product)
         for obj in qs:
             if self.id != obj.id and self.order == obj.order:
                 raise ValidationError("Duplicate order value for this product.")
 
     def save(self, *args, **kwargs):
-        self.full_clean()  # This will call clean() method to validate order
+        self.full_clean()
         super(ProductLine, self).save(*args, **kwargs)
 
     
     def __str__(self):
         return str(self.sku)
+    
+
+class ProductImage(models.Model):
+    alternative_name = models.CharField(max_length=100)
+    url = models.ImageField(upload_to=None, default="test.jpg")
+    productline = models.ForeignKey(ProductLine, on_delete=models.CASCADE, related_name="product_image")
+    order = OrderField(unique_for_field="productline", blank=True)
+    
+    def clean(self):
+        """
+        Validate that the order value is unique for the given product.
+        """
+        super().clean()
+
+        qs = ProductImage.objects.filter(productline=self.productline)
+        for obj in qs:
+            if self.id != obj.id and self.order == obj.order:
+                raise ValidationError("Duplicate order value for this product.")
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super(ProductImage, self).save(*args, **kwargs)
+        
+    def __str__(self):
+        return str(self.url)
