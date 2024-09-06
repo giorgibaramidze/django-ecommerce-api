@@ -6,7 +6,7 @@ class ProductFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Product
     
-    name = "test_product"
+    name = factory.Faker("word")
     description = "test_description"
     is_digital = True
     brand = factory.SubFactory(BrandFactory)
