@@ -4,6 +4,7 @@ from ecommerce.utils.querysets import ActiveQuerySet
 
 class Category(MPTTModel):
     name = models.CharField(max_length=100, unique=True)
+    slug = models.SlugField(max_length=255, null=True, blank=True)
     parent = TreeForeignKey("self", on_delete=models.PROTECT, null=True, blank=True)
     is_active = models.BooleanField(default=False)
     

@@ -15,7 +15,7 @@ class TestCategoryEndpoints:
 class TestBrandEndpoints:
     endpoint = '/api/brand/'
     
-    def test_category_get(self, brand_factory, api_client):
+    def test_brand_get(self, brand_factory, api_client):
         brand_factory.create_batch(4)
         response = api_client().get(self.endpoint)
         assert response.status_code == 200

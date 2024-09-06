@@ -13,12 +13,12 @@ class ProductViewSet(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
     lookup_field = "slug"
 
-    @action(methods=["get"], detail=False, url_path=r"category/(?P<category>\w+)")
-    def list_product_by_category(self, request, category=None):
+    @action(methods=["get"], detail=False, url_path=r"category/(?P<slug>[\w-]+)")
+    def list_product_by_category_slug(self, request, slug=None):
         """
         Endpoint for fetching products by category
         """
-        products = self.queryset.filter(category__name=category)
+        products = self.queryset.filter(category__slug=slug)
         serializer = self.get_serializer(products, many=True)
         return Response(serializer.data)
 

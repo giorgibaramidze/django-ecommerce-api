@@ -5,7 +5,9 @@ class CategoryFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Category
         
-    name = factory.Sequence(lambda n: "category_%d" % n)
+    name = factory.Sequence(lambda n: "category-%d" % n)
+    slug = factory.Sequence(lambda n: "category-%d" % n)
+    is_active = True
     
 class BrandFactory(factory.django.DjangoModelFactory):
     class Meta:

@@ -7,5 +7,6 @@ class ProductLineInline(admin.TabularInline):
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     inlines = [ProductLineInline]
+    
 
 admin.site.register(ProductLine)

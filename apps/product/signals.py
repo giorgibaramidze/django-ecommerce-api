@@ -11,7 +11,6 @@ def reorder_product_lines(sender, instance, **kwargs):
     Signal to reorder product lines after a ProductLine is deleted.
     """
     try:
-        # Reorder remaining items after a delete, maintaining the order integrity
         qs = sender.objects.filter(product=instance.product).order_by('order')
         for i, obj in enumerate(qs, start=1):
             obj.order = i
